@@ -81,13 +81,13 @@ class AuthenticationSystem:
         Returns: (success: bool, message: str, user_info: dict)
         """
         if username not in USER_DATABASE:
-            message = f"❌ User '{username}' not found in the system."
+            message = f" User '{username}' not found in the system."
             return False, message, None
         
         user = USER_DATABASE[username]
         
         if user["password"] != password:
-            message = "❌ Incorrect password. Access denied."
+            message = " Incorrect password. Access denied."
             return False, message, None
         
         self.current_user = {
@@ -96,7 +96,7 @@ class AuthenticationSystem:
             "name": user["name"]
         }
         
-        message = f"✅ Login successful! Welcome {user['name']} ({user['role'].upper()})"
+        message = f" Login successful! Welcome {user['name']} ({user['role'].upper()})"
         return True, message, self.current_user
     
     def logout(self):
@@ -104,7 +104,7 @@ class AuthenticationSystem:
         if self.current_user:
             username = self.current_user["username"]
             self.current_user = None
-            return f"✅ Logged out successfully. Goodbye {username}!"
+            return f" Logged out successfully. Goodbye {username}!"
         return "⚠️  No user is currently logged in."
     
     def is_logged_in(self):
@@ -199,7 +199,7 @@ class PriceCalculator:
         
         # Validate subtotal
         if subtotal <= 0:
-            result["error"] = "❌ Subtotal must be greater than 0"
+            result["error"] = " Subtotal must be greater than 0"
             return result
         
         # Step 1: Validate coupon code
@@ -502,7 +502,7 @@ class ECommerceSystem:
                     break
                 
                 else:
-                    print("❌ Invalid choice. Please try again.")
+                    print(" Invalid choice. Please try again.")
             
             else:
                 user = self.auth.get_current_user()
@@ -516,7 +516,7 @@ class ECommerceSystem:
                 elif choice == "1":
                     # Check permission
                     if not self.access_control.check_permission(user["role"], "purchase"):
-                        print(f"\n❌ Access Denied! Your role ({user['role']}) cannot perform this action.")
+                        print(f"\n Access Denied! Your role ({user['role']}) cannot perform this action.")
                         input("\nPress Enter to continue...")
                     else:
                         self.calculate_price_interactive()
@@ -565,7 +565,7 @@ class ECommerceSystem:
                     input("\nPress Enter to continue...")
                 
                 else:
-                    print("❌ Invalid choice. Please try again.")
+                    print("Invalid choice. Please try again.")
 
 # ============================================================================
 # MAIN ENTRY POINT
